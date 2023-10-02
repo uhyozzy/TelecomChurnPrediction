@@ -568,4 +568,9 @@ webPageCreate
 Denied
 *.xlsx
 
+# Image
+*.png
+*.jpg
+*.gif
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,vs,jupyternotebooks

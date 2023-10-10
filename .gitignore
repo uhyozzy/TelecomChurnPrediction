@@ -573,4 +573,6 @@ Denied
 *.jpg
 *.gif
 
+*_ignore.ipynb
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,vs,jupyternotebooks

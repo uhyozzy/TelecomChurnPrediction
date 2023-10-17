@@ -15,12 +15,30 @@ def test(request):
     try:
         lines = paginator.page(page)
     except PageNotAnInteger:
-        lines = paginator.page(1)
+        page = 1
+        lines = paginator.page(page)
     except EmptyPage:
-        lines = paginator.page(paginator.num_pages)
+        page = paginator.num_pages
+        lines = paginator.page(page)
+
+    left_index = (int(page) - 2)
+    if left_index < 1:
+        left_index = 1
+
+    right_index = (int(page) + 2)
+    if right_index > paginator.num_pages:
+        right_index = paginator.num_pages
+
+    custom_range = range(left_index, right_index + 1)
+
+    context = {"testing_point": testing_point, 
+               "lines": lines, 
+               "paginator": paginator, 
+               "custom_range": custom_range,
+               }
     # page_num = request.GET.get('page') # 페이지 번호 가져오기
     # testing_point_idx = paginator.get_page(page_num) # 페이지 인덱싱
-    return render(request, 'test.html', {"testing_point": lines})
+    return render(request, 'test.html', context)
 
 
 def inputtest(request):

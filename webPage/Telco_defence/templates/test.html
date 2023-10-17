@@ -14,7 +14,7 @@
     <th>해지 확률</th>
     <th>관리 그룹</th>
   </tr>
-  {% for tp in testing_point %}
+  {% for tp in lines %}
     <tr>
       <td>{{tp.customer_id}}</td>
       <td></td>
@@ -32,26 +32,26 @@
   {%endfor%}
 </table>
 
-{% if testing_point.has_other_pages %}
-<div>now page : {{ testing_point.number }}</div>
-<span class = "pagination">
-  {% if testing_point.has_previous %}
-    <a href="?page={{ testing_point.previous_page_number }}">&laquo;</a>
-  {% else %}
-    <span class = "disabled"><span>&laquo;</span></span>
-  {% endif %}
-  
-  {% for i in testing_point.paginator.page_range %}
-    
-    {% if testing_point.number == i %}
+{% if lines.has_other_pages %}
+    <div>now page : {{ lines.number }}</div>
+    <span class = "pagination">
+        {% if lines.has_previous %}
+            <a href="?page={{ lines.previous_page_number }}">&laquo;</a>
+        {% else %}
+            <span class = "disabled"><span>&laquo;</span></span>
+        {% endif %}
+
+    {#{% for i in paginator.page_range %}#}
+    {% for i in custom_range %}
+        {% if lines.number == i %}
       <span class="active"><span>{{ i }}</span></span>
     {% else %}
       <span><a href="?page={{ i }}">{{ i }}</a></span>
     {% endif %}
   {% endfor %}
   
-  {% if testing_point.has_next %} 
-      <a href="?page={{ testing_point.next_page_number }}">&raquo;</a>
+  {% if lines.has_next %} 
+      <a href="?page={{ lines.next_page_number }}">&raquo;</a>
   {% else %}
       <span class="disabled"><span>&raquo;</span></span>
   {%endif %}

@@ -1,0 +1,59 @@
+<!-- data loading and pagination test -->
+<table class="table-contents" style="padding:10px">
+  <tr>
+    <th>고객 번호</th>
+    <th></th>
+    <th>고객 관리 점수</th>
+    <th></th>
+    <th>나이</th>
+    <th></th>
+    <th>멤버쉽</th>
+    <th></th>
+    <th>해지 여부</th>
+    <th>변경 여부</th>
+    <th>해지 확률</th>
+    <th>관리 그룹</th>
+  </tr>
+  {% for tp in testing_point %}
+    <tr>
+      <td>{{tp.customer_id}}</td>
+      <td></td>
+      <td>{{tp.satisfaction_score}}</td>
+      <td></td>
+      <td>{{tp.age}}</td>
+      <td></td>
+      <td>{{tp.membership}}</td>
+      <td></td>
+      <td>{{tp.churn_value}}</td>
+      <td>{{tp.changed}}</td>
+      <td>{{tp.churn_proba}}</td>
+      <td>{{tp.churn_proba_group}}</td>
+  	</tr>
+  {%endfor%}
+</table>
+
+{% if testing_point.has_other_pages %}
+<div>now page : {{ testing_point.number }}</div>
+<span class = "pagination">
+  {% if testing_point.has_previous %}
+    <a href="?page={{ testing_point.previous_page_number }}">&laquo;</a>
+  {% else %}
+    <span class = "disabled"><span>&laquo;</span></span>
+  {% endif %}
+  
+  {% for i in testing_point.paginator.page_range %}
+    
+    {% if testing_point.number == i %}
+      <span class="active"><span>{{ i }}</span></span>
+    {% else %}
+      <span><a href="?page={{ i }}">{{ i }}</a></span>
+    {% endif %}
+  {% endfor %}
+  
+  {% if testing_point.has_next %} 
+      <a href="?page={{ testing_point.next_page_number }}">&raquo;</a>
+  {% else %}
+      <span class="disabled"><span>&raquo;</span></span>
+  {%endif %}
+</span>
+{%endif%}

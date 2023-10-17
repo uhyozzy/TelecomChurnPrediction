@@ -564,16 +564,22 @@ $RECYCLE.BIN/
 *.lnk
 
 # Folder
-webPageCreate
 Denied
 Visualing
-*.xlsx
+splitdata
+csschecker
+.vscode
 
 # Image
 *.png
 *.jpg
 *.gif
 
+# ignored_file
 *_ignore.ipynb
+local.txt
+sks.json
+*.xlsx
+*_ignore.html
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,vs,jupyternotebooks

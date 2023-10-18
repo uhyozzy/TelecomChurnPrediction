@@ -20,6 +20,7 @@ from Telco_defence import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.test),
-    path('2', views.inputtest, name='itt_a'),
+    path('', views.test),  # 기본 테스트
+    path('2', views.inputtest, name='itt_a'),  # 입력 테스트
+    path('3', views.savetest, name='stt'),  # 저장 및 DB 반영 테스트
 ]

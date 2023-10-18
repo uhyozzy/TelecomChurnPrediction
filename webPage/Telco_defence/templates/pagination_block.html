@@ -1,0 +1,28 @@
+{# Paginator 블록 #}
+{% block pagination %}
+{% if lines.has_other_pages %}
+    <div>now page : {{ lines.number }}</div>
+    <span class = "pagination">
+        {% if lines.has_previous %}
+            <a href="?page={{ lines.previous_page_number }}">&laquo;</a>
+        {% else %}
+            <span class = "disabled"><span>&laquo;</span></span>
+        {% endif %}
+
+        {#{% for i in paginator.page_range %}#}
+        {% for i in custom_range %}
+            {% if lines.number == i %}
+                <span class="active"><span>{{ i }}</span></span>
+            {% else %}
+                <span><a href="?page={{ i }}">{{ i }}</a></span>
+            {% endif %}
+        {% endfor %}
+
+        {% if lines.has_next %} 
+            <a href="?page={{ lines.next_page_number }}">&raquo;</a>
+        {% else %}
+            <span class="disabled"><span>&raquo;</span></span>
+        {% endif %}
+    </span>
+{% endif %}
+{% endblock %}

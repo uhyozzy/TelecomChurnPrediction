@@ -581,5 +581,6 @@ local.txt
 sks.json
 *.xlsx
 *_ignore.html
+*_ignore.py
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,python,vs,jupyternotebooks

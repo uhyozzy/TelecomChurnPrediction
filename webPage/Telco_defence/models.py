@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator # Validation Add(231019)
+# from .module.create_validation import   # Custom validation(231019)
 
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
@@ -8,6 +10,11 @@ from django.db import models
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 
+""" Work log
+231017, Model Create
+231019, tbUser_CLTV Add
+231019, Default Add
+"""
 
 # Main Schema #######################################################
 class TbUser(models.Model):  # User Table, 유저 테이블
@@ -19,12 +26,13 @@ class TbUser(models.Model):  # User Table, 유저 테이블
 
     customer_id = models.CharField(db_column='Customer_ID', verbose_name='고객 아이디', primary_key=True, max_length=10)
     age = models.IntegerField(db_column='Age', verbose_name='나이')
-    satisfaction_score = models.IntegerField(db_column='Satisfaction_Score', verbose_name='고객 관리 점수')
+    satisfaction_score = models.IntegerField(db_column='Satisfaction_Score', verbose_name='고객 관리 점수', default=0)
     membership = models.CharField(db_column='Membership', verbose_name='멤버쉽', max_length=10, blank=True, null=True)
-    churn_value = models.IntegerField(db_column='Churn_Value', verbose_name='해지 여부', blank=True, null=True)
-    changed = models.IntegerField(db_column='Changed', verbose_name='변경 여부', blank=True, null=True)
-    churn_proba = models.IntegerField(db_column='Churn_proba', verbose_name='해지 확률', blank=True, null=True)
-    churn_proba_group = models.CharField(db_column='Churn_proba_group', verbose_name='관리 그룹', max_length=10, blank=True, null=True)
+    cltv = models.BigIntegerField(db_column='CLTV', blank=True, null=True)  # 231019, CLTV column 추가
+    churn_value = models.IntegerField(db_column='Churn_Value', verbose_name='해지 여부', blank=True, null=True, default=0)
+    changed = models.IntegerField(db_column='Changed', verbose_name='변경 여부', blank=True, null=True, default=0)
+    churn_proba = models.IntegerField(db_column='Churn_proba', verbose_name='해지 확률', blank=True, null=True, default=0)
+    churn_proba_group = models.CharField(db_column='Churn_proba_group', verbose_name='관리 그룹', max_length=10, blank=True, null=True, default='Stable')
 
     def __str__(self):  # 클래스의 정보를 name으로 호출하는 함수
         return f'{self.customer_id}'
@@ -76,8 +84,9 @@ class TbUserLog(models.Model):  # User log Table, 유저 정보 변동 저장 �
     customer = models.ForeignKey(TbUser, models.CASCADE, db_column='Customer_ID', verbose_name='고객 아이디')
     change_time = models.DateTimeField(db_column='Change_time', verbose_name='변경 시간', auto_now_add=True)
     age = models.IntegerField(db_column='Age', verbose_name='나이')
-    satisfaction_score = models.IntegerField(db_column='Satisfaction_Score', verbose_name='고객 관리 점수')
-    churn_value = models.IntegerField(db_column='Churn_Value', verbose_name='해지 여부', blank=True, null=True)
+    satisfaction_score = models.IntegerField(db_column='Satisfaction_Score', verbose_name='고객 관리 점수', default=0)
+    cltv = models.BigIntegerField(db_column='CLTV', blank=True, null=True, default=0)  # 231019, CLTV column 추가 대응
+    churn_value = models.IntegerField(db_column='Churn_Value', verbose_name='해지 여부', blank=True, null=True, default=0)
 
     def __str__(self):  # 클래스의 정보를 name으로 호출하는 함수
         return f'{self.customer}'
@@ -164,6 +173,20 @@ class TbUserSs(models.Model):
     ss_3 = models.BigIntegerField(db_column='SS_3', blank=True, null=True)
     ss_4 = models.BigIntegerField(db_column='SS_4', blank=True, null=True)
     ss_5 = models.BigIntegerField(db_column='SS_5', blank=True, null=True)
+
+class TbUserCltv(models.Model):  # 231019, CTLV column 추가로 인한 통계 테이블 추가
+    class Meta:
+        verbose_name = '고객 점수'
+        verbose_name_plural = '고객 점수'
+        managed = False
+        db_table = 'tb_user_cltv'
+
+    cltv_0 = models.BigIntegerField(blank=True, null=True)
+    cltv_1 = models.BigIntegerField(blank=True, null=True)
+    cltv_2 = models.BigIntegerField(blank=True, null=True)
+    cltv_3 = models.BigIntegerField(blank=True, null=True)
+    cltv_4 = models.BigIntegerField(blank=True, null=True)
+    cltv_5 = models.BigIntegerField(blank=True, null=True)
 # User Statistics Schema End #######################################################
 
 

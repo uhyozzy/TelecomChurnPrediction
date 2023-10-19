@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import TbUser, TbContract, TbService
 # from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .module.create_functions import pagination, create_id
+from .module.create_functions import pagination, customer_create
 
 
 # Create your views here.
@@ -12,7 +12,7 @@ def test(request):  # 읽기 테스트, paginator 추가(23.10.17~18)
     # testing_point = TbUser.objects.filter(customer_id='0004-TLHLJ')
     # testing_point = TbUser.objects.filter(customer_id='1')
 
-    print(testing_point.query)  # SQL 확인용
+    # print(testing_point.query)  # SQL 확인용
     page = request.GET.get('page')
     lines, paginator, custom_range = pagination(testing_point, page)
 
@@ -20,9 +20,11 @@ def test(request):  # 읽기 테스트, paginator 추가(23.10.17~18)
                "lines": lines, 
                "paginator": paginator, 
                "custom_range": custom_range,
+               "end_page": paginator.num_pages,
+               "paginator_idx": paginator.num_pages - 2,
                }
 
-    return render(request, 'test.html', context)
+    return render(request, 'index.html', context)
 
 
 def inputtest(request):  # 입력 테스트(23.10.17~18)
@@ -43,32 +45,8 @@ def savetest(request):  # 신규 생성 및 DB 반영 테스트 진행(23.10.18)
                      "streaming_services": 0, "combined_product": 0, "number_of_dependents": 0}
         for i in argu_list.keys():
             argu_list[i] = request.POST.get(i)
-        
-        new_customer_info_u = TbUser()
-        new_customer_info_c = TbContract()
-        new_customer_info_s = TbService()
-        
-        new_customer_info_u.customer_id = request.POST.get('customer_id')
-        new_customer_info_u.age = request.POST.get('age')
-        new_customer_info_u.satisfaction_score = request.POST.get('satisfaction_score')
-        new_customer_info_u.membership = request.POST.get('membership')
-        new_customer_info_u.churn_value = request.POST.get('churn_value')
-        new_customer_info_u.save()
-        
-        new_customer_info_c.customer_id = new_customer_info_u.customer_id
-        new_customer_info_c.contract = request.POST.get('contract')
-        new_customer_info_c.tenure_in_months = request.POST.get('tenure_in_months')
-        new_customer_info_c.monthly_charge = request.POST.get('monthly_charge')
-        new_customer_info_c.total_revenue = request.POST.get('total_revenue')
-        new_customer_info_c.save()
-        
-        new_customer_info_s.customer_id = new_customer_info_u.customer_id
-        new_customer_info_s.tech_services = request.POST.get('tech_services')
-        new_customer_info_s.streaming_services = request.POST.get('streaming_services')
-        new_customer_info_s.combined_product = request.POST.get('combined_product')
-        new_customer_info_s.number_of_dependents = request.POST.get('number_of_dependents')
-        new_customer_info_s.save()
-        
+
+        customer_create(request)  # 생성 함수
         return redirect('stt')
     pass
 
@@ -98,6 +76,8 @@ def savetest(request):  # 신규 생성 및 DB 반영 테스트 진행(23.10.18)
 
 - 변경 필요사항
     - 모델에 Validation 추가해야 함(231018)
+    - 모델에 default 값도 추가해야 함(231019)
+    - CLTV 통계 모델 추가, user 모델에 CLTV 추가(231019)
 '''
 
 def main_page_render(request):  # 시작시 보여지는 메인페이지 렌더링

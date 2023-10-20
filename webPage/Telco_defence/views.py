@@ -17,19 +17,20 @@ def test(request):  # 읽기 테스트, paginator 추가(23.10.17~18)
     lines, paginator, custom_range = pagination(testing_point, page)
 
     context = {"testing_point": testing_point, 
-               "lines": lines, 
-               "paginator": paginator, 
-               "custom_range": custom_range,
-               "end_page": paginator.num_pages,
-               "paginator_idx": paginator.num_pages - 2,
+               "lines": lines,  # paginator 결과
+               "paginator": paginator,  # paginator 데이터
+               "custom_range": custom_range,  # 페이지 길어지는 것 방지
+               "end_page": paginator.num_pages,  # 마지막 페이지 확인
+               "paginator_idx": paginator.num_pages - 2,  # 마지막 페이지 가까울 때 중복 출력 방지용 기준점
                }
 
-    return render(request, 'index.html', context)
+    return render(request, 'testing_page/index.html', context)
 
 
 def inputtest(request):  # 입력 테스트(23.10.17~18)
     if request.method == 'GET':
-        return render(request, 'inputtest.html')
+        test_context = "This is test sentence."
+        return render(request, 'testing_page/inputtest.html', {"test_context": test_context})
     else:
         word = request.POST.get('testing')
         print(word)
@@ -38,7 +39,7 @@ def inputtest(request):  # 입력 테스트(23.10.17~18)
 
 def savetest(request):  # 신규 생성 및 DB 반영 테스트 진행(23.10.18)
     if request.method == 'GET':
-        return render(request, 'savetest.html')
+        return render(request, 'testing_page/savetest.html')
     else:
         argu_list = {"customer_id": 0, "age": 0, "satisfaction_score": 0, "membership": 0, "churn_value": 0,
                      "contract": 0, "tenure_in_months": 0, "monthly_charge": 0, "total_revenue": 0, "tech_services": 0,
@@ -80,26 +81,71 @@ def savetest(request):  # 신규 생성 및 DB 반영 테스트 진행(23.10.18)
     - CLTV 통계 모델 추가, user 모델에 CLTV 추가(231019)
 '''
 
+
 def main_page_render(request):  # 시작시 보여지는 메인페이지 렌더링
-    pass
+    return render(request, 'home.html')
+
 
 def customer_list(request):  # 전체 고객 리스트 출력
-    pass
+    if request.method == 'GET':
+        list_data = TbUser.objects.all()
 
-def customer_detail(request):  # 고객 ID를 통한 세부 고객 정보 출력
-    pass
+        page = request.GET.get('page')
+        lines, paginator, custom_range = pagination(list_data, page)
 
-def new_customer(request):  # 신규 고객 정보 입력
-    # GET, POST 나누어야 함
-    # save 사용
-    pass
+        context = {"list_data": list_data, 
+                   "lines": lines,  # paginator 결과
+                   "paginator": paginator,  # paginator 데이터
+                   "custom_range": custom_range,  # 페이지 길어지는 것 방지
+                   "end_page": paginator.num_pages,  # 마지막 페이지 확인
+                   "paginator_idx": paginator.num_pages - 2,  # 마지막 페이지 가까울 때 중복 출력 방지용 기준점
+                   }
 
-def edit_customer(request):  # 기존 고객 정보 수정
-    # GET, POST 나누어야 함
-    pass
+        return render(request, 'list.html', context)
 
-def dashboard_1(request):  # 시각화
-    pass
+    # if request.method == 'POST':
 
-def dashboard_2(request):
-    pass
+
+def customer_detail(request, customer_ids=None):  # 고객 ID를 통한 세부 고객 정보 출력
+    if request.method == "GET":
+        if customer_ids is None:
+            c_id = None
+        else:
+            c_id = customer_ids
+        data = TbUser.objects.filter(customer_id=c_id)
+
+        context = {"text": "This is marketing recommand", 
+                   "c_id": c_id, 
+                   "data": data}
+
+        return render(request, 'detail.html', context)
+
+    elif request.method == "POST":
+        c_id = request.POST.get('input_cs_id')
+
+        if c_id == "":
+            return redirect('customer-detail')
+        else:
+            print(c_id, type(c_id))
+            data = TbUser.objects.filter(customer_id=c_id)
+
+            context = {"text": "This is marketing recommand", 
+                       "c_id": c_id, 
+                       "data": data}
+
+            print(context["c_id"])
+            return render(request, 'detail.html', context)
+
+
+def dashboard(request):  # 시각화
+    viewing_dict = {"user": "사용자 정보", "service": "서비스 정보", "contract": "요금제 정보"}
+    viewing_key = request.POST.get('dropdown_select')
+
+    if viewing_key is None:
+        viewing = viewing_dict['user']
+    else:
+        viewing = viewing_dict[viewing_key]
+
+    print(viewing)
+    context = {"now_view": viewing, }
+    return render(request, 'dashboard.html', context)

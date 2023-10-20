@@ -1,0 +1,63 @@
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Detail Page | Telcodefence</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    {% if c_id is None %}
+        <link rel="stylesheet" href="./static/css/styles.css">
+    {% else %}
+        <link rel="stylesheet" href="../static/css/styles.css">
+    {% endif %}
+
+    <style>
+    /* Figma Background for illustrative/preview purposes only.
+        You can remove this style tag with no consequence */
+    body {background: #E5E5E5; }
+    </style>
+</head>
+
+<body>
+    <div class=e20_1448 description="전체" >
+        <div  class="e63_319" description="전체2" ></div>
+        <span id="market_recom" class="e20_1574" description="마케팅 내용" >자세한 마케팅 방안을 확인하려면 제안보기 버튼을 클릭하세요</span>
+        {% for dt in data%}
+        <span  class="e62_270" description="총 요금 텍스트" >{{dt.tbcontract.total_revenue}}</span>
+        <span  class="e62_269" description="월 요금 텍스트" >{{dt.tbcontract.monthly_charge}}</span>
+        <span  class="e62_268" description="계약 기간 텍스트" >{{dt.tbcontract.tenure_in_months}}</span>
+        <span  class="e62_267" description="계약 형태 텍스트" >{{dt.tbcontract.contract}}</span>
+        <span  class="e62_266" description="통신 결합 이용 개수 텍스트" >{{dt.tbservice.combined_product}}</span>
+        <span  class="e62_265" description="가족 결합 이용자 수 텍스트" >{{dt.tbservice.number_of_dependents}}</span>
+        <span  class="e62_264" description="부가 서비스 이용 개수 텍스트" >{{dt.tbservice.streaming_services}}</span>
+        <span  class="e62_263" description="기술 서비스 이용 개수 텍스트" >{{dt.tbservice.tech_services}}</span>
+        <span  class="e62_262" description="CLTV 텍스트" >{{dt.cltv}}</span>
+        <span  class="e62_261" description="멤버십 단계 텍스트" >{{dt.membership}}</span>
+        <span  class="e62_260" description="고객 관리 점수 텍스트" >{{dt.satisfaction_score}}</span>
+        <span  class="e62_244" description="나이 텍스트" >{{dt.age}}</span>
+        {% endfor %}
+        <button onclick="document.getElementById('market_recom').innerHTML='{{text}}'"  class="e62_240" description="마케팅 제안 보기" >
+            <div  class="e62_308" description="마케팅 제안 보기" ></div>
+    </div>
+
+    {% if c_id is None %}
+        <form action="{% url 'customer-detail-selected' c_id %}" method="post"> {% csrf_token %}
+            <input type="text" class="e29_9" description="고객 아이디 입력 텍스트" placeholder="고객 아이디를 입력하세요" name="input_cs_id">
+            <input class="detail_submit" type="submit" value="검색">
+        </form>
+    {% else %}
+        <form action="{% url 'customer-detail-selected' c_id %}" method="post"> {% csrf_token %}
+            <input type="text" class="e29_9" description="고객 아이디 입력 텍스트" value="{{c_id}}" name="input_cs_id">
+            <input class="detail_submit" type="submit" value="검색">
+        </form>
+    {% endif %}
+
+    <div class=e62_306 description="세부페이지 바로가기 묶음" >
+        <a href="{% url 'customer-detail' %}" class="e62_274" description="세부 고객 정보 바로가기" ></a>
+        <a href="{% url 'customer-list' %}" class="e62_304" description="고객 이탈 예측 관리 바로가기" ></a>
+        <a href="{% url 'dashboard' %}" class="e62_305" description="종합 정보 시각화 바로가기" ></a>
+    </div>
+
+    <a href="{% url 'main-page' %}" class="e20_1588" description="홈페이지 바로가기"></a>
+    </div>
+</body>
+</html>

@@ -20,7 +20,12 @@ from Telco_defence import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.test),  # 기본 테스트
-    path('2', views.inputtest, name='itt_a'),  # 입력 테스트
-    path('3', views.savetest, name='stt'),  # 저장 및 DB 반영 테스트
+    path('test/1', views.test),  # 기본 테스트
+    path('test/2', views.inputtest, name='itt_a'),  # 입력 테스트
+    path('test/3', views.savetest, name='stt'),  # 저장 및 DB 반영 테스트
+    path('', views.main_page_render, name='main-page'),  # 메인 페이지 렌더링
+    path('list', views.customer_list, name='customer-list'),  # 리스트 페이지
+    path('detail', views.customer_detail, name='customer-detail'),  # 세부 정보 페이지
+    path('detail/<str:customer_ids>', views.customer_detail, name='customer-detail-selected'),  # 세부 정보 페이지
+    path('dashboard', views.dashboard, name='dashboard'),  # 세부 정보 페이지
 ]

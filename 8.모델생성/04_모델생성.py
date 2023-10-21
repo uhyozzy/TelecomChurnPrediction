@@ -19,10 +19,6 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score, recall_score, f1_score
 from sklearn.metrics import classification_report
 
-# 그래프에서 마이너스 폰트 깨지는 문제에 대한 대처
-import matplotlib.pyplot as plt
-plt.rcParams['font.family'] = 'Malgun Gothic'
-
 #모델 학습 및 이탈확률 추가 함수
 def churn_prediction(df):
     
@@ -93,10 +89,15 @@ def churn_prediction(df):
 
 
     
-    return df
+    return df #전체 데이터프레임 값으로 반환됨.
 
 df = pd.read_excel("../Churn_final.xlsx")
 result = churn_prediction(df)
+print(result)
+# 반환값 출력
+#       Customer ID  Age  Number of Dependents Membership  ...  Monthly Charge  Total Revenue  Churn Value       이탈확률
+# 0     8779-QRDMV   78                     0        NaN  ...           39.65          59.65            1  65.468628
+# 1     7495-OOKFY   74                     1    Offer E  ...           80.65        1024.10            1  52.012144
 
 #컬럼에 이탈확률 추가하여 파일로 저장
-result.to_excel("Churn_final_이탈확률.xlsx", index=False)
+#result.to_excel("Churn_final_이탈확률.xlsx", index=False)

@@ -1,29 +1,10 @@
 #터미널에서 pip install scikit-learn
 import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-from datetime import datetime
-from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
-import random
-import warnings
-warnings.filterwarnings('ignore')
-
-# 모델 생성
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import SGDClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import f1_score
-from sklearn.metrics import precision_score, recall_score, f1_score
-from sklearn.metrics import classification_report
 
-# 그래프에서 마이너스 폰트 깨지는 문제에 대한 대처
-import matplotlib.pyplot as plt
-plt.rcParams['font.family'] = 'Malgun Gothic'
-
-#모델 학습 및 이탈확률 추가 함수
+#모델 학습 및 이탈확률 추가 함수. 데이터프레임 입력
 def churn_prediction(df):
     
     train_df = df.copy()
@@ -42,53 +23,64 @@ def churn_prediction(df):
     ## Initialize variable
     X_train_origin, X_test_origin, y_train_origin, y_test_origin = X_train.copy(), X_test.copy(), y_train.copy(), y_test.copy()
 
-    ## Numeric Only
+    ## 수치형만 스케일링
     Numeric_column_list = []
     for i in range(len(X_data.columns)):
         if X_data[X_data.columns[i]].dtype == 'float64' or X_data[X_data.columns[i]].dtype == 'int64':
             Numeric_column_list.append(X_data.columns[i])
-
     numeric_train_data, numeric_test_data = X_train[Numeric_column_list], X_test[Numeric_column_list]
-
     scaler = MinMaxScaler()
-
     X_train[Numeric_column_list] = scaler.fit_transform(numeric_train_data)
     X_test[Numeric_column_list] = scaler.transform(numeric_test_data)
-    
 
     # 선정한 모델로 학습
     best_model = SGDClassifier(random_state=42, alpha=0.001, loss='modified_huber',
                                max_iter=100, penalty='l1', tol=1e-05)
-
     best_model.fit(X_train, y_train)
 
-
     # 예측 결과 저장
-    
     result_df = df.copy()
     result_df = result_df.iloc[:, 1:-1] # Customer ID, Churn Value 제외
     
     ## 범주형 컬럼 One-Hot Encoding
     encoding_test_data = pd.get_dummies(result_df, columns=['Membership', 'Contract'])
     
-    ## 정규화 (Numeric Only)
+    ## 수치형만 정규화
     test_Numeric_column_list = []
     for i in range(len(encoding_test_data.columns)):
         if encoding_test_data[encoding_test_data.columns[i]].dtype == 'float64' or encoding_test_data[encoding_test_data.columns[i]].dtype == 'int64':
-            test_Numeric_column_list.append(encoding_test_data.columns[i])
-            
+            test_Numeric_column_list.append(encoding_test_data.columns[i])         
     test_numeric_data = encoding_test_data[test_Numeric_column_list]
-
     scaler = MinMaxScaler()
-
     encoding_test_data[test_Numeric_column_list] = scaler.fit_transform(test_numeric_data)
     final_test_data = encoding_test_data
             
     # 최적의 모델을 사용하여 테스트 데이터의 클래스 확률을 예측합니다.
     predicted_probabilities = best_model.predict_proba(final_test_data)
-    #클래스 1 확률만 선택해서 백분률로 출력 - 순서?
-    return predicted_probabilities[:, 1]*100
 
-df = pd.read_excel("Churn_final.xlsx")
-result = churn_prediction(df)
-print(result)
+    # 결과를 이탈확률(Churn Probability) 데이터프레임에 추가
+    df['Churn Probability'] = predicted_probabilities[:, 1]*100  # 클래스 1의 확률을 선택
+
+    # DataFrame에서 'Customer ID'와 '이탈확률(Churn Probability)' 열만 선택
+    df_p = df[['Customer ID', 'Churn Probability']]
+
+    # JSON 형식으로 변환
+    json_df = df_p.to_json(orient='records')
+
+    return json_df #JSON 형식 반환
+
+#사용 파일 경로 지정
+#df = pd.read_excel("../Churn_final.xlsx")
+
+#함수 사용
+#result = churn_prediction(df)
+
+#print(result)
+# 반환값 출력
+# ...,"Churn Probability":26.4970288665},{"Customer ID":"3186-AJIEK","Churn Probability":0.0}]
+
+# JSON 데이터를 문자열로 저장
+#json_string = result
+# 해당 문자열을 churn_predictions.json 파일로 저장
+#with open("churn_predictions.json", "w") as json_file:
+#    json_file.write(json_string)

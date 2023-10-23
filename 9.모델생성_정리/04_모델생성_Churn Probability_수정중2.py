@@ -1,10 +1,13 @@
 import pandas as pd
 import joblib
+import warnings
+# 경고를 무시
+warnings.filterwarnings('ignore', category=UserWarning)
 
 # 모델 학습 및 이탈확률 추가 함수. 데이터프레임 입력
 def churn_prediction(df):
-
-    # 데이터 원본 min, max값
+    
+    # 데이터 원본 min, max값 - 데이터에서 직접 가져올수도 있을듯
     age_max = 80
     age_min = 19
     number_of_dependents_max = 9
@@ -24,7 +27,7 @@ def churn_prediction(df):
     total_revenue_max = 11979.34
     total_revenue_min = 21.36
 
-    # 변환 함수
+    # 스케일링 변환 함수
     def transform_and_scale(value, min_val, max_val):
         if value > max_val:
             return (value - max_val) / (max_val - min_val)
@@ -32,30 +35,39 @@ def churn_prediction(df):
             return (value - min_val) / (max_val - min_val)
         else:
             return (value - min_val) / (max_val - min_val)
-
-    # Membership 더미 변수 생성
+    
+    # 더미 변수 생성
     def create_membership_dummy(Membership):
-        membership_dummy = {
-            'Membership_None': 0,
-            'Membership_Offer A': 0,
-            'Membership_Offer B': 0,
-            'Membership_Offer C': 0,
-            'Membership_Offer D': 0,
-            'Membership_Offer E': 0
-        }
-        membership_dummy['Membership_' + Membership] = 1
-        return pd.Series(membership_dummy)
+        membership_dummy = [0, 0, 0, 0, 0, 0]  # None, Offer A, Offer B, Offer C, Offer D, Offer E에 대한 더미 변수
 
-    # Contract 더미 변수 생성
+        if Membership == "None":
+            membership_dummy[0] = 1
+        elif Membership == "Offer A":
+            membership_dummy[1] = 1
+        elif Membership == "Offer B":
+            membership_dummy[2] = 1
+        elif Membership == "Offer C":
+            membership_dummy[3] = 1
+        elif Membership == "Offer D":
+            membership_dummy[4] = 1
+        elif Membership == "Offer E":
+            membership_dummy[5] = 1
+
+        return membership_dummy
+    
+    # 더미 변수 생성
     def create_contract_dummy(Contract):
-        contract_dummy = {
-            'Contract_Month-to-Month': 0,
-            'Contract_One Year': 0,
-            'Contract_Two Year': 0
-        }
-        contract_dummy['Contract_' + Contract] = 1
-        return pd.Series(contract_dummy)
+        contract_dummy = [0, 0, 0]  # Month-to-Month, One Year, Two Year에 대한 더미 변수
 
+        if Contract == "Month-to-Month":
+            contract_dummy[0] = 1
+        elif Contract == "One Year":
+            contract_dummy[1] = 1
+        elif Contract == "Two Year":
+            contract_dummy[2] = 1
+
+        return contract_dummy
+    
     # 데이터 스케일링
     def scale_data(row):
         scaled_data = []
@@ -73,14 +85,6 @@ def churn_prediction(df):
             scaled_data.append(transform_and_scale(input_values[i], min_values[i], max_values[i]))
 
         return scaled_data
-    
-    train_df = df.copy()
-    train_df = pd.concat([train_df, train_df['Membership'].apply(create_membership_dummy), train_df['Contract'].apply(create_contract_dummy)], axis=1)
-
-    train_df['Scaled Data'] = train_df.apply(scale_data, axis=1)
-
-    # 모델 로드
-    loaded_model = joblib.load('./SGD_model.pkl')
 
     # 예측 및 결과 저장
     def predict_churn(row):
@@ -90,6 +94,15 @@ def churn_prediction(df):
         model_input = scaled_data + membership_dummy + contract_dummy
         churn_probability = loaded_model.predict_proba([model_input])[0][1] * 100  # 클래스 1의 확률을 선택
         return churn_probability
+    
+    train_df = df.copy()
+    train_df['Membership Dummy'] = train_df['Membership'].apply(create_membership_dummy)
+    train_df['Contract Dummy'] = train_df['Contract'].apply(create_contract_dummy)
+
+    train_df['Scaled Data'] = train_df.apply(scale_data, axis=1)
+
+    # 모델 로드
+    loaded_model = joblib.load('./SGD_model.pkl')
 
     train_df['Churn Probability'] = train_df.apply(predict_churn, axis=1)
 
@@ -103,12 +116,14 @@ def churn_prediction(df):
 # 사용 파일 경로 지정
 df = pd.read_excel("../Churn_final.xlsx")
 
-# 결과를 저장할 데이터프레임 생성
-result_df = df.copy()
-result_df['Churn Probability'] = 0  # 빈 열 생성
+# df 첫 행부터 마지막 행까지 예측 반복. (주의: 실행시 7천여개 전부 표시됨.)
+# for i in range(len(df)):
+#     churn_prob = churn_prediction(df.iloc[[i]])
+#     print(churn_prob)
 
-for index, row in df.iterrows():
-    # 각 행에 대한 예측을 수행
-    churn_prob = churn_prediction(pd.DataFrame([row]))  # 현재 행만을 포함하는 데이터프레임을 생성하여 예측 함수 호출
-    churn_prob = float(churn_prob[0]['Churn Probability'])  # JSON 결과에서 Churn Probability 값 추출
-    result_df.at[index, 'Churn Probability'] = churn_prob  # 결과를 데이터프레임에 저장
+#100개만 출력
+for i in range(0, 100):
+    churn_prob = churn_prediction(df.iloc[[i]])
+    print(churn_prob)
+
+#이탈확률 수치가 원본파일과 비교했을때 일의 자리~소수점 자리 정도로 조금씩 다름.

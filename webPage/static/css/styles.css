@@ -1,17 +1,3 @@
-/* add css */
-.spacer-list {
-    width: 100%;
-    height: 450px;
-    position: absolute;
-}
-.pagination {
-    width: 100%;
-    height: 30px;
-    position: relative;
-    left: 400px;
-    top: 250px;
-}
-
 /* home.css */
 .29_980 { 
 	overflow:hidden;
@@ -137,6 +123,20 @@
 
 
 /* page1.css = detail page */
+.churn_proba {
+	color:black;
+    /* border: 1px red solid; */
+	width:464px;
+	height:60px;
+	position:absolute;
+	left:1019px;
+	top:1365px;
+	font-family:Montserrat;
+    text-align: center left;
+	font-size:40px;
+    font-weight: bold;
+	letter-spacing:0;
+}
 
 .20_1448 { 
 	overflow:hidden;
@@ -162,154 +162,154 @@
 .e20_1574 { 
 	color:rgba(0, 0, 0, 1);
 	width:464px;
-	height:518px;
+	height:410px;
 	position:absolute;
 	left:1019px;
-	top:1439px;
+	top:1560px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_270 { 
+.e62_270 { /* 총 요금 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:1065px;
-	top:1173px;
+	left:1061px;
+	top:1169px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_269 { 
+.e62_269 { /* 월 요금 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:543px;
-	top:1174px;
+	left:540px; /* 543 */
+	top:1169px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_268 { 
+.e62_268 { /* 계약 기간 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:1067px;
-	top:1068px;
+	left:1061px;
+	top:1061px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_267 { 
+.e62_267 { /* 계약 형태 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:543px;
-	top:1068px;
+	left:540px; /* 543 */
+	top:1061px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_266 { 
+.e62_266 { /* 통신 결합 이용 개수 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:1067px;
-	top:852px;
+	left:1061px;
+	top:847px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_265 { 
+.e62_265 { /* 가족 결합 이용자 수 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:543px;
-	top:852px;
+	left:540px; /* 543 */
+	top:847px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_264 { 
+.e62_264 { /* 부가 서비스 이용 개수 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:1067px;
-	top:747px;
+	left:1061px;
+	top:740px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_263 { 
+.e62_263 { /* 기술 서비스 이용 개수 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:545px;
-	top:747px;
+	left:540px;
+	top:740px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_262 { 
+.e62_262 { /* CLTV */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:1065px;
-	top:531px;
+	left:1061px;
+	top:525px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_261 { 
+.e62_261 { /* 멤버십 단계 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:544px;
-	top:531px;
+	left:540px;
+	top:525px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_260 { 
+.e62_260 { /* 고객 관리 점수 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:1065px;
-	top:421px;
+	left:1061px;
+	top:418px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
 	letter-spacing:0;
 }
-.e62_244 { 
+.e62_244 { /* 나이 */
 	color:rgba(0, 0, 0, 1);
 	width:387px;
 	height:24px;
 	position:absolute;
-	left:544px;
-	top:421px;
+	left:540px; /* 544 */
+	top:418px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
@@ -346,10 +346,17 @@
 	background-size:cover;
 }
 .detail_submit {
-    left: 1150px;
-    top: 100px;
+    width: 100px;
+    height: 40px;
+    left: 1140px;
+    top: 94px;
     position: relative;
-    border: red solid 1px;
+    background-image:url("../images/detail_search_button.png");
+    background-repeat : no-repeat;
+    background-position: center;
+    border-style: none;
+    background-color: transparent;
+    /* border: red solid 1px; */
 }
 .e29_9 { 
 	color:rgba(0, 0, 0, 0.6000000238418579);
@@ -357,7 +364,7 @@
 	height:26px;
 	position:absolute;
 	left:728px;
-	top:108px;
+	top:112px;
 	font-family:Montserrat;
 	text-align:left;
 	font-size:20px;
@@ -409,6 +416,41 @@
 
 
 /* page2.css = list page */
+.spacer-list {
+    width: 100%;
+    height: 450px;
+    position: absolute;
+}
+.pagination {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    left: 400px;
+    top: 250px;
+}
+
+.list_filter {
+    display:inline-block;
+    width:300px;
+	height:30px;
+    position:absolute;
+    top:325px;
+    left:1180px;
+    /* border: 1px red solid; */
+}
+
+.list_filter_submit {
+    width: 50px;
+    height: 28px;
+    position: absolute;
+    top:325.5px;
+    left:1490px;
+    background-image : url('../images/view_button.png');
+    background-repeat : no-repeat;
+    background-position: center;
+    border-style: none;
+}
+
 .29_920 { 
 	overflow:hidden;
 }
@@ -816,7 +858,7 @@
     /* border: 1px red solid; */
 }
 .e64_509 { 
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:62.70000076293945px;
 	position:absolute;
 	left:450px; /* 468 */
@@ -824,7 +866,7 @@
 }
 .e64_492 { 
 	color:rgba(0, 0, 0, 1);
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:30.58461570739746px;
 	position:absolute;
 	left:0px;
@@ -836,7 +878,7 @@
 }
 .e64_493 { 
 	color:rgba(79.00000289082527, 79.00000289082527, 79.00000289082527, 1);
-	width:129.64224243164062px;
+	width:500px; /* 129.64224243164062px; */
 	height:19.115385055541992px;
 	position:absolute;
 	left:0px;
@@ -847,7 +889,7 @@
 	letter-spacing:0;
 }
 .e64_510 { 
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:62.70000076293945px;
 	position:absolute;
 	left:1025px; /* 1043 */
@@ -855,7 +897,7 @@
 }
 .e64_494 { 
 	color:rgba(0, 0, 0, 1);
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:30.58461570739746px;
 	position:absolute;
 	left:0px;
@@ -867,7 +909,7 @@
 }
 .e64_495 { 
 	color:rgba(79.00000289082527, 79.00000289082527, 79.00000289082527, 1);
-	width:129.64224243164062px;
+	width:500px; /* 129.64224243164062px; */
 	height:19.115385055541992px;
 	position:absolute;
 	left:0px;
@@ -878,7 +920,7 @@
 	letter-spacing:0;
 }
 .e64_511 { 
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:62.70000076293945px;
 	position:absolute;
 	left:450px; /* 468 */
@@ -886,7 +928,7 @@
 }
 .e64_496 { 
 	color:rgba(0, 0, 0, 1);
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:30.58461570739746px;
 	position:absolute;
 	left:0px;
@@ -898,7 +940,7 @@
 }
 .e64_497 { 
 	color:rgba(79.00000289082527, 79.00000289082527, 79.00000289082527, 1);
-	width:129.64224243164062px;
+	width:500px; /* 129.64224243164062px; */
 	height:19.115385055541992px;
 	position:absolute;
 	left:0px;
@@ -909,7 +951,7 @@
 	letter-spacing:0;
 }
 .e64_512 { 
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:62.70000076293945px;
 	position:absolute;
 	left:1025px; /* 1043 */
@@ -917,7 +959,7 @@
 }
 .e64_498 { 
 	color:rgba(0, 0, 0, 1);
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:30.58461570739746px;
 	position:absolute;
 	left:0px;
@@ -929,7 +971,7 @@
 }
 .e64_499 { 
 	color:rgba(79.00000289082527, 79.00000289082527, 79.00000289082527, 1);
-	width:129.64224243164062px;
+	width:500px; /* 129.64224243164062px; */
 	height:19.115385055541992px;
 	position:absolute;
 	left:0px;
@@ -940,7 +982,7 @@
 	letter-spacing:0;
 }
 .e64_513 { 
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:62.70000076293945px;
 	position:absolute;
 	left:450px; /* 468 */
@@ -948,7 +990,7 @@
 }
 .e64_500 { 
 	color:rgba(0, 0, 0, 1);
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:30.58461570739746px;
 	position:absolute;
 	left:0px;
@@ -960,7 +1002,7 @@
 }
 .e64_501 { 
 	color:rgba(79.00000289082527, 79.00000289082527, 79.00000289082527, 1);
-	width:129.64224243164062px;
+	width:500px; /* 129.64224243164062px; */
 	height:19.115385055541992px;
 	position:absolute;
 	left:0px;
@@ -971,7 +1013,7 @@
 	letter-spacing:0;
 }
 .e64_514 { 
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:62.70000076293945px;
 	position:absolute;
 	left:1025px; /* 1043 */
@@ -979,7 +1021,7 @@
 }
 .e64_502 { 
 	color:rgba(0, 0, 0, 1);
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:30.58461570739746px;
 	position:absolute;
 	left:0px;
@@ -991,7 +1033,7 @@
 }
 .e64_503 { 
 	color:rgba(79.00000289082527, 79.00000289082527, 79.00000289082527, 1);
-	width:129.64224243164062px;
+	width:500px; /* 129.64224243164062px; */
 	height:19.115385055541992px;
 	position:absolute;
 	left:0px;
@@ -1002,7 +1044,7 @@
 	letter-spacing:0;
 }
 .e64_515 { 
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:62.70000076293945px;
 	position:absolute;
 	left:450px; /* 468 */
@@ -1010,7 +1052,7 @@
 }
 .e64_504 { 
 	color:rgba(0, 0, 0, 1);
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:30.58461570739746px;
 	position:absolute;
 	left:0px;
@@ -1022,7 +1064,7 @@
 }
 .e64_505 { 
 	color:rgba(79.00000289082527, 79.00000289082527, 79.00000289082527, 1);
-	width:129.64224243164062px;
+	width:500px; /* 129.64224243164062px; */
 	height:19.115385055541992px;
 	position:absolute;
 	left:0px;
@@ -1033,7 +1075,7 @@
 	letter-spacing:0;
 }
 .e64_516 { 
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:62.70000076293945px;
 	position:absolute;
 	left:1025px; /* 1043 */
@@ -1041,7 +1083,7 @@
 }
 .e64_506 { 
 	color:rgba(0, 0, 0, 1);
-	width:180.3070526123047px;
+	width:300px; /* 180.3070526123047px; */
 	height:30.58461570739746px;
 	position:absolute;
 	left:0px;
@@ -1053,7 +1095,7 @@
 }
 .e64_507 { 
 	color:rgba(79.00000289082527, 79.00000289082527, 79.00000289082527, 1);
-	width:129.64224243164062px;
+	width:500px; /* 129.64224243164062px; */
 	height:19.115385055541992px;
 	position:absolute;
 	left:0px;

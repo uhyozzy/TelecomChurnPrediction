@@ -1,6 +1,5 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator # Validation Add(231019)
-# from .module.create_validation import   # Custom validation(231019)
+from .module.choice_list import sas_choice, ms_choice, ct_choice, ts_choice, sts_choice, cp_choice, cpg_choice
 
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
@@ -14,7 +13,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator # Valida
 231017, Model Create
 231019, tbUser_CLTV Add
 231019, Default Add
+231021-22, Choice Add
+231023, New migrate
 """
+
 
 # Main Schema #######################################################
 class TbUser(models.Model):  # User Table, 유저 테이블
@@ -26,13 +28,13 @@ class TbUser(models.Model):  # User Table, 유저 테이블
 
     customer_id = models.CharField(db_column='Customer_ID', verbose_name='고객 아이디', primary_key=True, max_length=10)
     age = models.IntegerField(db_column='Age', verbose_name='나이')
-    satisfaction_score = models.IntegerField(db_column='Satisfaction_Score', verbose_name='고객 관리 점수', default=0)
-    membership = models.CharField(db_column='Membership', verbose_name='멤버쉽', max_length=10, blank=True, null=True)
-    cltv = models.BigIntegerField(db_column='CLTV', blank=True, null=True)  # 231019, CLTV column 추가
+    satisfaction_score = models.IntegerField(db_column='Satisfaction_Score', verbose_name='고객 관리 점수', default=1, choices=sas_choice)  # 231022, default 0 > 1로 변경, 231022, choice 추가
+    membership = models.CharField(db_column='Membership', verbose_name='멤버쉽', max_length=10, blank=True, null=True, choices=ms_choice)  # 231022, choice 추가
+    cltv = models.BigIntegerField(db_column='CLTV', verbose_name="고객 점수", blank=True, null=True, default=1)  # 231019, CLTV column 추가 / 231022, default 추가
     churn_value = models.IntegerField(db_column='Churn_Value', verbose_name='해지 여부', blank=True, null=True, default=0)
     changed = models.IntegerField(db_column='Changed', verbose_name='변경 여부', blank=True, null=True, default=0)
-    churn_proba = models.IntegerField(db_column='Churn_proba', verbose_name='해지 확률', blank=True, null=True, default=0)
-    churn_proba_group = models.CharField(db_column='Churn_proba_group', verbose_name='관리 그룹', max_length=10, blank=True, null=True, default='Stable')
+    churn_proba = models.FloatField(db_column='Churn_proba', verbose_name='해지 확률', blank=True, null=True, default=0)  # 231022, Int > Float로 변경
+    churn_proba_group = models.CharField(db_column='Churn_proba_group', verbose_name='관리 그룹', max_length=10, blank=True, null=True, default='Stable', choices=cpg_choice)  # 231023, choice 추가
 
     def __str__(self):  # 클래스의 정보를 name으로 호출하는 함수
         return f'{self.customer_id}'
@@ -46,8 +48,8 @@ class TbContract(models.Model):  # Contract Table, 요금제 정보 테이블
         db_table = 'tb_contract'
 
     customer = models.OneToOneField('TbUser', models.CASCADE, db_column='Customer_ID', verbose_name='고객 아이디', primary_key=True)
-    contract = models.CharField(db_column='Contract', verbose_name='계약 종류', max_length=20, blank=True, null=True)
-    tenure_in_months = models.BigIntegerField(db_column='Tenure_in_months', verbose_name='계약 개월 수', blank=True, null=True)
+    contract = models.CharField(db_column='Contract', verbose_name='계약 종류', max_length=20, blank=True, null=True, choices=ct_choice)  # 231022, choice 추가
+    tenure_in_months = models.BigIntegerField(db_column='Tenure_in_months', verbose_name='계약 개월 수', blank=True, null=True, default=1)  # 231022, default 추가
     monthly_charge = models.FloatField(db_column='Monthly_Charge', verbose_name='기본 요금', blank=True, null=True)
     total_revenue = models.FloatField(db_column='Total_Revenue', verbose_name='총 요금', blank=True, null=True)
 
@@ -63,9 +65,9 @@ class TbService(models.Model):  # Service Table, 서비스 정보 테이블
         db_table = 'tb_service'
 
     customer = models.OneToOneField('TbUser', models.CASCADE, db_column='Customer_ID', verbose_name='고객 아이디', primary_key=True)
-    tech_services = models.IntegerField(db_column='Tech_services', verbose_name='기술 서비스', blank=True, null=True)
-    streaming_services = models.IntegerField(db_column='Streaming_services', verbose_name='부가 서비스', blank=True, null=True)
-    combined_product = models.IntegerField(db_column='Combined_Product', verbose_name='결합 상품 수', blank=True, null=True)
+    tech_services = models.IntegerField(db_column='Tech_services', verbose_name='기술 서비스', blank=True, null=True, choices=ts_choice)  # 231022, choice 추가
+    streaming_services = models.IntegerField(db_column='Streaming_services', verbose_name='부가 서비스', blank=True, null=True, choices=sts_choice)  # 231022, choice 추가
+    combined_product = models.IntegerField(db_column='Combined_Product', verbose_name='결합 상품 수', blank=True, null=True, choices=cp_choice)  # 231022, choice 추가
     number_of_dependents = models.IntegerField(db_column='Number_of_Dependents', verbose_name='가족 결합 수', blank=True, null=True)
 
     def __str__(self):  # 클래스의 정보를 name으로 호출하는 함수

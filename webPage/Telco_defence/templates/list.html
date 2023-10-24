@@ -19,6 +19,22 @@
         <!-- <div class="spacer-list"></div> {# 추가함 #} -->
     </div>
 
+        <form method="GET"> {#{% csrf_token %}#}
+            <select class="list_filter" name="filtering_order">
+                <option value="all">- 선택 -</option>
+                <option value="all">---- 이탈률 ----</option>
+                <option value="upper40">이탈 40% 이상</option>
+                <option value="upper60">이탈 60% 이상</option>
+                <option value="all">---- 위험군 ----</option>
+                <option value="potential">잠재 이탈 위험군</option>
+                <option value="high">이탈 고위험군</option>
+            </select>
+            <input class="list_filter_submit" type="submit" value="">
+        </form>
+        {% if filtering_order_name and filtering_order_name != '없음' %}
+            <span style="display: inline-block; top:360px; left:1200px; position:absolute;">필터 : {{filtering_order_name}}</span>
+        {% endif %}
+
     {% for data in lines %}
     <div class="e49_196" description="출력값 묶음" > {# 수정함 #}
         <span class="e42_3404" description="customerid 출력값"> {# 수정함 #}
@@ -26,18 +42,17 @@
         </span>
         
         <span class=e49_192 description="이탈 확률 출력값" > 
-            <span  class="e49_193" description="이탈 확률 출력값 텍스트" >{{data.churn_proba}}</span>
+            <span  class="e49_193" description="이탈 확률 출력값 텍스트" >{{data.churn_proba|floatformat:4}} %</span>
         </span>
         
         <span class=e49_194 description="이탈 그룹 출력값" >
-            <span  class="e49_195" description="이탈 그룹 출력값 텍스트" >{{data.churn_proba_group}}</span>
+            <span  class="e49_195" description="이탈 그룹 출력값 텍스트" >{{data.get_churn_proba_group_display}}</span>
         </span>
     </div>
     {% endfor %}
 
     <div class=e64_485 description="평균이탈확률, 트레이닝 정확도 묶음" > {# 수정함 #}
-        <span  class="e31_1932" description="평균이탈확률 텍스트" >XX.XX</span>
-        <span  class="e31_1933" description="트레이닝정확도 텍스트" >xx.xx</span>
+        <span  class="e31_1932" description="평균이탈확률 텍스트" >{{ proba_avg|floatformat:4 }}</span>
     </div>
 
     <div class=e63_335 description="세부페이지 바로가기 묶음" > {# 수정함 #}

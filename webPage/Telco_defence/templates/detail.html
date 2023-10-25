@@ -48,12 +48,12 @@
 
     {% if c_id is None %}
         <form action="{% url 'customer-detail-searched' c_id %}" method="GET"> {#{% csrf_token %}#}
-            <input type="text" class="e29_9" description="고객 아이디 입력 텍스트" placeholder="고객 아이디를 입력하세요" name="input_cs_id">
+            <input type="text" class="e29_9" description="고객 아이디 입력 텍스트" placeholder="고객 아이디를 입력하세요" name="input_cs_id" list="iddata">
             <input class="detail_submit" type="submit" value="">
         </form>
     {% else %}
         <form action="{% url 'customer-detail-searched' c_id %}" method="GET"> {#{% csrf_token %}#}
-            <input type="text" class="e29_9" description="고객 아이디 입력 텍스트" value="{{c_id}}" name="input_cs_id">
+            <input type="text" class="e29_9" description="고객 아이디 입력 텍스트" value="{{c_id}}" name="input_cs_id" list="iddata">
             <input class="detail_submit" type="submit" value="">
         </form>
     {% endif %}
@@ -65,6 +65,11 @@
     </div>
 
     <a href="{% url 'main-page' %}" class="e20_1588" description="홈페이지 바로가기"></a>
+    <datalist id="iddata">
+        {% for dt in list_data %}
+            <option value="{{ dt.customer_id }}"></option>
+        {% endfor %}
+    </datalist>
     </div>
 </body>
 </html>

@@ -152,14 +152,19 @@ def customer_list(request):  # 전체 고객 리스트 출력
 
 def customer_detail(request):  # 고객 ID를 통한 세부 고객 정보 페이지 단순 출력
 
+    list_data = TbUser.objects.all()
+    
     context = {"text": "먼저 고객을 검색하세요", 
                "c_id": None,
+               "list_data": list_data,
                }
 
     return render(request, "detail.html", context)
 
 
 def customer_detail_selected(request, customer_ids=0):  # 리스트 페이지 고객 ID를 링크를 통한 세부 고객 정보 출력
+
+    list_data = TbUser.objects.all()
     data = TbUser.objects.filter(customer_id=customer_ids)
 
     cltv_value = list(TbUser.objects.filter(customer_id=customer_ids).values())[0]['cltv']
@@ -171,7 +176,9 @@ def customer_detail_selected(request, customer_ids=0):  # 리스트 페이지 �
 
     context = {"text": suggestion_text, 
                "c_id": customer_ids, 
-               "data": data}
+               "data": data,
+               "list_data": list_data,
+               }
 
     return render(request, "detail.html", context)
 
@@ -182,6 +189,7 @@ def customer_detail_search(request, customer_ids=0):  # 고객 정보 페이지�
         return redirect('customer-detail')
 
     else:
+        list_data = TbUser.objects.all()
         data = TbUser.objects.filter(customer_id=checkpoint)
 
         if data.exists():
@@ -194,7 +202,9 @@ def customer_detail_search(request, customer_ids=0):  # 고객 정보 페이지�
 
             context = {"text": suggestion_text, 
                        "c_id": checkpoint, 
-                       "data": data}
+                       "data": data,
+                       "list_data": list_data,
+                       }
             return render(request, 'detail.html', context)
         else:
             return redirect('customer-detail')

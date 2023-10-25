@@ -126,12 +126,15 @@ def marketing_suggest(CLTV, total_revenue, tenure_months, num_dependents):
         return "CLTV 낮지만 수익 가치가 높은 기업 고객님 입니다. [요금 할인(15%)] 제안 가능합니다."
     elif 2000 <= CLTV < 4000 and 4000 <= total_revenue < 6000:
         return "CLTV 낮지만 수익이 중간 가치인 기업 고객님 입니다. [요금 할인(10%)] 제안 가능합니다."
-    elif CLTV < 4000 and 24 <= tenure_months < 36:
+    elif CLTV > 4000 and 24 <= tenure_months < 36:
         return "CLTV 낮은 저가치 개인 고객님 입니다. [할인 혜택 or 업그레이드 or 맞춤형] 제안 가능합니다."
-    elif CLTV < 4000 and tenure_months < 24:
+    # 경우의 수 추가 부분 
+    elif CLTV <= 4000 and tenure_months < 24:
         return "CLTV 낮은 저가치 개인 고객님 입니다. [업그레이드 or 맞춤형] 제안 가능합니다."
+    elif 2000 <= CLTV < 4000 and tenure_months < 24:
+        return "CLTV 낮은 저가치 개인 고객님 입니다. 제안할 마케팅 제안이 없습니다."        
     else:
-        return "CLTV 그룹을 확인할 수 없습니다."
+        return "제안할 마케팅 제안이 없습니다."  # 231025, 마케팅 추가 수정
 
 
 # 데이터 저장 - DB 연동 추가(Insert into)

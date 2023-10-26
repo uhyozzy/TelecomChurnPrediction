@@ -571,9 +571,7 @@ csschecker
 .vscode
 
 # Image
-*.png
-*.jpg
-*.gif
+
 
 # ignored_file
 *_ignore.ipynb

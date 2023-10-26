@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-sk_file = BASE_DIR / 'sks.json'
+sk_file = BASE_DIR / 'sks.json'  # Django 고유의 보안키 분리, 별도의 파일에 내용 접근하는 방식
 
 with open(sk_file) as file:
     secrets = json.loads(file.read())
@@ -55,12 +55,14 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-    'Telco_defence',
+    'Telco_defence',  # 새로 등록된 앱(startapp을 통해 생성된 폴더명) 추가
+    # 원 방식은 PROJECT_APPS가 있는게 아니라, DJANGO_APPS에 이 앱 이름을 추가함
 ]
 
 THIRD_PARTY_APPS = []
 
-INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
+INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS  
+# INSTALLED_APPS를 인식한다. 따라서 위에 작성된 세 개의 이름을 합치기
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -97,15 +99,16 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 pymysql.install_as_MySQLdb()
+# Django에서 기본적으로 사용하는 DB는 Sqlite3. MySQL을 사용하기 위해서 pymysql을 연결
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'telcodefence',
-        'USER': 'dbadmin',
-        'PASSWORD': 'q1w2e3r4',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'NAME': 'telcodefence',  # DB 이름
+        'USER': 'dbadmin',  # DB에 접근할 유저명
+        'PASSWORD': 'q1w2e3r4',  # 유저 로그인 비밀번호
+        'HOST': 'localhost',  # 연결할 주소, localhost(==127.0.0.1)말고 다른 ip를 넣으면 그 ip만 접속 가능
+        'PORT': '3306'  # MySQL의 Port 번호, 다른 포트를 사용하려면 변경해야함
     }
 }
 
@@ -132,14 +135,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ko-kr'
+LANGUAGE_CODE = 'ko-kr'  # admin 페이지등 한글 구현을 위해 변경
 
-TIME_ZONE = 'Asia/Seoul'
+TIME_ZONE = 'Asia/Seoul'  # 시간 관련한 함수를 사용할 때, 한국 시계에 맞추기
 
 USE_I18N = True
 
 USE_TZ = True
 
+SESSION_COOKIE_AGE = 1800  # 세션 방식 유지 시간, 30분
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -148,7 +152,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
-]
+]  # static, CSS나 image등 외부 파일 불러오기 위한 기본 경로
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

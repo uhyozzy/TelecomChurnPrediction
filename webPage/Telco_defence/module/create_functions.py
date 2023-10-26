@@ -68,14 +68,14 @@ def pagination(inputpage, page):
 
 # 대시보드 그래프 그리기
 def dashboard_management(selection, queryset):
-    import plotly.express as px  # 이건 필요없나? 지우고 해봐야겠다.
+    import plotly.express as px
     import kaleido
 
     import pandas as pd
     import numpy as np
 
     if selection == 'user':
-        from ..module.Dashboard import user_chart_corr, user_chart_stat
+        from ..module.Dashboard import user_chart_corr, user_chart_stat  # dashboard.py에 있는 두 함수 호출
         x_cols = ['Age', 'Membership', 'Satisfaction Score', 'CLTV', 'Churn Value']
         target_df = pd.DataFrame(list(queryset), columns=x_cols)
         user_chart_stat(target_df)
@@ -135,66 +135,3 @@ def marketing_suggest(CLTV, total_revenue, tenure_months, num_dependents):
         return "CLTV 낮은 저가치 개인 고객님 입니다. 제안할 마케팅 제안이 없습니다."        
     else:
         return "제안할 마케팅 제안이 없습니다."  # 231025, 마케팅 추가 수정
-
-
-# 데이터 저장 - DB 연동 추가(Insert into)
-def customer_create(request):
-    """ ## Customer Create function
-    사용할 지 모르는 상태. 일단 기능 구현 완료(23.10.20)
-    """
-    from ..models import TbContract, TbService, TbUser
-
-    customer_ids = create_id()
-    if TbUser.objects.filter(customer_id=customer_ids).exists():
-        # id 중복여부 확인
-        customer_ids = create_id()
-
-    new_customer_info_u = TbUser()
-    new_customer_info_c = TbContract()
-    new_customer_info_s = TbService()
-
-    new_customer_info_u.customer_id = customer_ids
-    new_customer_info_u.age = request.POST.get('age')
-    new_customer_info_u.satisfaction_score = request.POST.get('satisfaction_score')
-    new_customer_info_u.membership = request.POST.get('membership')
-    new_customer_info_u.churn_value = request.POST.get('churn_value')
-    # new_customer_info_u.save()
-    print("customer_id", new_customer_info_u.customer_id)
-    print("age", new_customer_info_u.age)
-    print("satisfaction_score", new_customer_info_u.satisfaction_score)
-    print("membership", new_customer_info_u.membership)
-    print("churn_value", new_customer_info_u.churn_value)
-
-    new_customer_info_c.customer_id = new_customer_info_u.customer_id
-    new_customer_info_c.contract = request.POST.get('contract')
-    new_customer_info_c.tenure_in_months = 1
-    new_customer_info_c.monthly_charge = request.POST.get('monthly_charge')
-    new_customer_info_c.total_revenue = request.POST.get('total_revenue')
-    # new_customer_info_c.save()
-    print("customer_id", new_customer_info_c.customer_id)
-    print("contract", new_customer_info_c.contract)
-    print("tenure_in_months", new_customer_info_c.tenure_in_months)
-    print("monthly_charge", new_customer_info_c.monthly_charge)
-    print("total_revenue", new_customer_info_c.total_revenue)
-
-    new_customer_info_s.customer_id = new_customer_info_u.customer_id
-    new_customer_info_s.tech_services = request.POST.get('tech_services')
-    new_customer_info_s.streaming_services = request.POST.get('streaming_services')
-    new_customer_info_s.combined_product = request.POST.get('combined_product')
-    new_customer_info_s.number_of_dependents = request.POST.get('number_of_dependents')
-    # new_customer_info_s.save()
-    print("customer_id", new_customer_info_s.customer_id)
-    print("tech_services", new_customer_info_s.tech_services)
-    print("streaming_services", new_customer_info_s.streaming_services)
-    print("combined_product", new_customer_info_s.combined_product)
-    print("number_of_dependents", new_customer_info_s.number_of_dependents)
-
-
-# 데이터 삭제 - DB 연동 삭제(Delete from)
-def customer_delete():
-    pass
-
-
-# 데이터 수정 - DB 연동 수정(Update set)
-def customer_edit():
-    pass

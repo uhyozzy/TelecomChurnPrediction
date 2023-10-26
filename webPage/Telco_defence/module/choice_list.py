@@ -6,7 +6,7 @@
     streaming_services = models.IntegerField(db_column='Streaming_services', verbose_name='부가 서비스', blank=True, null=True)
     combined_product = models.IntegerField(db_column='Combined_Product', verbose_name='결합 상품 수', blank=True, null=True)
 """
-# (model, display)
+# (model, display) 형식을 가짐
 
 sas_choice = (  # Satisfaction_score
     (1, '1점'),
@@ -54,7 +54,7 @@ cp_choice = (  # Combined_product
 )
 
 cpg_choice = (  # Combined_product
-    ('Stable', '안정 그룹'),
-    ('Potential', '잠재적 그룹'),
-    ('High', '고위험 그룹'),
+    ('Stable', '안정'),
+    ('Potential', '잠재적'),
+    ('High', '고위험'),
 )

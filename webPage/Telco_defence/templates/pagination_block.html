@@ -1,4 +1,5 @@
 {# Paginator 블록 #}
+{# 사용을 위해선 탬플릿에 {% include "pagination_block.html" %} {% block paginator %} {% endblock %}추가 #}
 {% block pagination %}
 {% if lines.has_other_pages %}
     {# <div>now page : {{ lines.number }}</div> #}

@@ -18,10 +18,11 @@
 </head>
 
 <body>
-    <div class=e20_1448 description="전체" >
-        <div  class="e63_319" description="전체2" ></div>
-        <span id="market_recom" class="e20_1574" description="마케팅 내용" >자세한 마케팅 방안을 확인하려면 제안보기 버튼을 클릭하세요</span>
+    <div class=e20_1448 description="전체">
+        <div  class="e63_319" description="전체2"></div>
+        <span id="market_recom" class="e20_1574" description="마케팅 내용">자세한 마케팅 방안을 확인하려면 제안보기 버튼을 클릭하세요</span>
         {% for dt in data%}
+
             {% if dt.churn_proba_group == "Stable" %}
                 <span class="churn_proba" description="해지 확률"><span style="color: green">{{dt.churn_proba|floatformat:2}}</span>%, {{dt.get_churn_proba_group_display}}</span>
             {% elif dt.churn_proba_group == "Potential" %}
@@ -29,39 +30,41 @@
             {% elif dt.churn_proba_group == "High" %}
                 <span class="churn_proba" description="해지 확률"><span style="color: red">{{dt.churn_proba|floatformat:2}}</span>%, {{dt.get_churn_proba_group_display}}</span>
             {% endif %}
-            <span class="e62_270" description="총 요금 텍스트" >{{dt.tbcontract.total_revenue}}</span>
-            <span class="e62_269" description="월 요금 텍스트" >{{dt.tbcontract.monthly_charge}}</span>
-            <span class="e62_268" description="계약 기간 텍스트" >{{dt.tbcontract.tenure_in_months}}</span>
-            <span class="e62_267" description="계약 형태 텍스트" >{{dt.tbcontract.get_contract_display}}</span>
-            <span class="e62_266" description="통신 결합 이용 개수 텍스트" >{{dt.tbservice.get_combined_product_display}}</span>
-            <span class="e62_265" description="가족 결합 이용자 수 텍스트" >{{dt.tbservice.number_of_dependents}}</span>
-            <span class="e62_264" description="부가 서비스 이용 개수 텍스트" >{{dt.tbservice.get_streaming_services_display}}</span>
-            <span class="e62_263" description="기술 서비스 이용 개수 텍스트" >{{dt.tbservice.get_tech_services_display}}</span>
-            <span class="e62_262" description="CLTV 텍스트" >{{dt.cltv}}</span>
-            <span class="e62_261" description="멤버십 단계 텍스트" >{{dt.get_membership_display}}</span>
-            <span class="e62_260" description="고객 관리 점수 텍스트" >{{dt.get_satisfaction_score_display}}</span>
-            <span class="e62_244" description="나이 텍스트" >{{dt.age}}</span>
+
+            <span class="e62_270" description="총 요금 텍스트">{{dt.tbcontract.total_revenue}}</span>
+            <span class="e62_269" description="월 요금 텍스트">{{dt.tbcontract.monthly_charge}}</span>
+            <span class="e62_268" description="계약 기간 텍스트">{{dt.tbcontract.tenure_in_months}}</span>
+            <span class="e62_267" description="계약 형태 텍스트">{{dt.tbcontract.get_contract_display}}</span>
+            <span class="e62_266" description="통신 결합 이용 개수 텍스트">{{dt.tbservice.get_combined_product_display}}</span>
+            <span class="e62_265" description="가족 결합 이용자 수 텍스트">{{dt.tbservice.number_of_dependents}}</span>
+            <span class="e62_264" description="부가 서비스 이용 개수 텍스트">{{dt.tbservice.get_streaming_services_display}}</span>
+            <span class="e62_263" description="기술 서비스 이용 개수 텍스트">{{dt.tbservice.get_tech_services_display}}</span>
+            <span class="e62_262" description="CLTV 텍스트">{{dt.cltv}}</span>
+            <span class="e62_261" description="멤버십 단계 텍스트">{{dt.get_membership_display}}</span>
+            <span class="e62_260" description="고객 관리 점수 텍스트">{{dt.get_satisfaction_score_display}}</span>
+            <span class="e62_244" description="나이 텍스트">{{dt.age}}</span>
         {% endfor %}
-        <button onclick="document.getElementById('market_recom').innerHTML='{{text}}'"  class="e62_240" description="마케팅 제안 보기" >
-            <div  class="e62_308" description="마케팅 제안 보기" ></div>
+
+        <button onclick="document.getElementById('market_recom').innerHTML='{{text}}'"  class="e62_240" description="마케팅 제안 보기">
+        <div  class="e62_308" description="마케팅 제안 보기"></div>
     </div>
 
     {% if c_id is None %}
-        <form action="{% url 'customer-detail-searched' c_id %}" method="GET"> {#{% csrf_token %}#}
+        <form action="{% url 'customer-detail-searched' c_id %}" method="GET">
             <input type="text" class="e29_9" description="고객 아이디 입력 텍스트" placeholder="고객 아이디를 입력하세요" name="input_cs_id" list="iddata">
             <input class="detail_submit" type="submit" value="">
         </form>
     {% else %}
-        <form action="{% url 'customer-detail-searched' c_id %}" method="GET"> {#{% csrf_token %}#}
+        <form action="{% url 'customer-detail-searched' c_id %}" method="GET">
             <input type="text" class="e29_9" description="고객 아이디 입력 텍스트" value="{{c_id}}" name="input_cs_id" list="iddata">
             <input class="detail_submit" type="submit" value="">
         </form>
     {% endif %}
 
-    <div class=e62_306 description="세부페이지 바로가기 묶음" >
-        <a href="{% url 'customer-detail' %}" class="e62_274" description="세부 고객 정보 바로가기" ></a>
-        <a href="{% url 'customer-list' %}" class="e62_304" description="고객 이탈 예측 관리 바로가기" ></a>
-        <a href="{% url 'dashboard' %}" class="e62_305" description="종합 정보 시각화 바로가기" ></a>
+    <div class=e62_306 description="세부페이지 바로가기 묶음">
+        <a href="{% url 'customer-detail' %}" class="e62_274" description="세부 고객 정보 바로가기"></a>
+        <a href="{% url 'customer-list' %}" class="e62_304" description="고객 이탈 예측 관리 바로가기"></a>
+        <a href="{% url 'dashboard' %}" class="e62_305" description="종합 정보 시각화 바로가기"></a>
     </div>
 
     <a href="{% url 'main-page' %}" class="e20_1588" description="홈페이지 바로가기"></a>

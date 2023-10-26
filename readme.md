@@ -22,3 +22,7 @@ by. 김소희, 구희나, 라영채, 유효진, 임정빈
 
 ### ✅ Data set 출처 및 설명
 https://community.ibm.com/community/user/businessanalytics/blogs/steven-macko/2019/07/11/telco-customer-churn-1113
+- 고객 수(행 개수) : 7043
+- 데이터 셋 업데이트 날짜 : 2019.07.11
+- Telco customer churn 에는 캘리포니아 고객 7043명의 집 전화 및 인터넷 서비스를 제공한 가상의 통신 회사에 대한 정보가 포함됨.
+

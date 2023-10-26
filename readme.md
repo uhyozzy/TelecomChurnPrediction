@@ -1,27 +1,24 @@
 ## **통신사 고객이탈 예측을 통한 해지방어전략 제공 서비스**
 
-고객이탈 예측관리 리스트 현황, 세부 고객정보, 종합 시각화 정보와
-해지예측모델을 통해 고객 해지를 미연에 방지하고, 마케팅 제안을 제공하는 서비스입니다.
+**'고객이탈 예측관리 리스트 현황', '세부 고객정보', '종합 시각화 정보'** 와<br/>
+**해지예측모델**을 통해 고객 해지를 미연에 방지하고, 마케팅 제안을 제공하는 서비스입니다.
 
 by. 김소희, 구희나, 라영채, 유효진, 임정빈
+<br/><br/>
 
 ### ✅ 시스템 구성도
 ![시스템 구성도](https://github.com/uhyozzy/multi_finalproject/assets/134241881/4253eb1b-f46e-4be4-a7fa-acbcd6f15c22)
-
-
-
-
+<br/><br/>
 
 ### ✅ 웹사이트 구현
-![그림1](https://github.com/uhyozzy/multi_finalproject/assets/134241881/242e662c-5f09-41ba-abbb-3292dc407029)
-![그림2](https://github.com/uhyozzy/multi_finalproject/assets/134241881/8c52260d-39af-4bdd-a0ef-7596a6a487a3)
-
-
-
-
-
+![그림1](https://github.com/uhyozzy/multi_finalproject/assets/134241881/a6fffe63-c345-472f-80c4-677ee1842aac)
+<br/><br/>
 
 ### ✅ 참고 문헌
-- 논문1: 통신 업계의 지속 가능한 비즈니스를 위한 고객 이탈 예측 모델링: 최적화된 가중 앙상블 머신(Predictive Churn Modeling for Sustainable Business in the Telecommunication Industry: Optimize Weighted Ensemble Machine Learning)
-- 논문2: 통신 서비스 이탈의 결정요인: 체계적인 문헌검토(Determinants of churn in telecommunication services: a systematic literature review)
-- 논문3 : 고객이탈 예측 모델링 기반 기대수익 최적화 방안 : 고객이탈 방지를 위한 마케팅 비용 최적화
+- 논문 1: 김재엽(2020), 고객이탈 예측 모델링 기반 기대수익 최적화 방안 : 고객이탈 방지를 위한 마케팅 비용 최적화, 서울대학교대학원 석사학위 논문
+- 학술지 1: 임진희(2022), XAI 를 활용한 통신사 이탈고객의 특성 이해와 마케팅 적용방안 연구, ASK 2022 학술발표대회 논문집, 29(1), 21-24
+- 학술지 2: 김상휘 외4(2020), 머신러닝, 딥러닝을 이용한 통신서비스 이용고객 분석 및 이탈 예측, 온라인 추계학술발표대회 논문집, 27(2), 568-571
+<br/><br/>
+
+### ✅ Data set 출처 및 설명
+https://community.ibm.com/community/user/businessanalytics/blogs/steven-macko/2019/07/11/telco-customer-churn-1113

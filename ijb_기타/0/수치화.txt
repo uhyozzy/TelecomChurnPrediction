@@ -1,0 +1,33 @@
+Offer
+ 0, Offer A : 1, Offer B : 2, Offer C : 3, Offer D : 4, Offer E : 5
+
+Internet Type
+ 0, DSL : 1, Fiber Optic : 2, Cable : 3
+
+Contract
+ Month-to-Month : 0, One Year : 1, Two Year : 2
+
+Payment Method
+ Bank Withdrawal : 0, Credit Card : 1, Mailed Check : 2
+
+Customer Status
+ Churned : 0, Stayed : 2, Joined : 3
+
+Churn Category
+ 0, Attitude : 1, Competitor : 2, Dissatisfaction : 3, Price : 4, Other : 5
+
+Churn Reason
+
+
+--
+'Offer A' : 1, 'Offer B' : 2, 'Offer C' : 3, 'Offer D' : 4, 'Offer E' : 5, 'DSL' : 1, 'Fiber Optic' : 2, 'Cable' : 3, 'Month-to-Month' : 0, 'One Year' : 1, 'Two Year' : 2, 'Bank Withdrawal' : 0, 'Credit Card' : 1, 'Mailed Check' : 2, 'Churned' : 0, 'Stayed' : 2, 'Joined' : 3, 'Attitude' : 1, 'Competitor' : 2, 'Dissatisfaction' : 3, 'Price' : 4, 'Other' : 5
+
+Membership_None
+Membership_Offer A
+Membership_Offer B
+Membership_Offer C
+Membership_Offer D
+Membership_Offer E
+Contract_Month-to-Month
+Contract_One Year
+Contract_Two Year

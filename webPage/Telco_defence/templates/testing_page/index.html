@@ -1,0 +1,67 @@
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Html Generated</title>
+    <meta name="description" content="Figma htmlGenerator">
+    <meta name="author" content="htmlGenerator">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+
+    <style>
+    /*
+        Figma Background for illustrative/preview purposes only.
+        You can remove this style tag with no consequence
+    */
+    body {background: #E5E5E5; }
+    </style>
+</head>
+
+<body>
+    <div class="e29_920" description="전체" >
+        <div class="e63_334" description="전체" ></div>
+        <!-- <div class="e64_487" description="pnge, nex묶음">
+            <div class="e64_488" description="page" >
+                <span  class="e64_489" description="page 텍스트" >page 1 2 3 4 5 6 7 8 9 ... </span>
+            </div>
+            <div class="e64_490" description="next" >
+                <span  class="e64_491" description="next 텍스트" >Next</span> -->
+            </div>
+        </div>
+
+        <div class="spacer"></div> {# 추가함 #}
+
+        {% for tp in lines %}
+        <div class="e49_196" description="출력값 묶음" > {# 수정함 #}
+            <span class="e42_3404" description="customerid 출력값"> {# 수정함 #}
+                <a href="" class="e42_3405" description="customerid 출력값 텍스트" >{{tp.customer_id}}</a>
+            </span>
+            <span class=e49_192 description="이탈 확률 출력값" > 
+                <span  class="e49_193" description="이탈 확률 출력값 텍스트" >{{tp.churn_proba}}</span>
+            </span>
+                <span class=e49_194 description="이탈 그룹 출력값" >
+                    <span  class="e49_195" description="이탈 그룹 출력값 텍스트" >{{tp.churn_proba_group}}</span>
+                </span>
+        </div>
+        {% endfor %}
+
+        <div class=e64_485 description="평균이탈확률, 트레이닝 정확도 묶음" > {# 수정함 #}
+            <span  class="e31_1932" description="평균이탈확률 텍스트" >xx.xx</span>
+            <span  class="e31_1933" description="트레이닝정확도 텍스트" >xx.xx</span>
+        </div>
+
+        <div class=e63_335 description="세부페이지 바로가기 묶음" > {# 수정함 #}
+            <a href="" class="e63_336" description="세부 고객 정보 바로가기" ></a>
+            <a href="" class="e63_337" description="고객 이탈 예측 관리 바로가기" ></a>
+            <a href="" class="e63_338" description="종합 정보 시각화 바로가기" ></a>
+        </div>
+
+        <a href="" class="e42_3393" description="홈페이지 바로가기" ></a> {# 수정함 #}
+    </div>
+    <div class="pagination"> {# 추가함 #}
+    {% include "pagination_block.html" %}
+    {% block paginator %}
+    {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<form method="post"> {% csrf_token %}
+    <input type="text" style="border: none; background: transparent;" name="testing">
+    <input type="submit" value="create">
+</form>
+
+<button onclick="document.getElementById('print').innerHTML='{{test_context}}'"><img src="static/images/home_shortcut.png"/></button>
+<button onclick="document.getElementById('print').innerHTML=''">지우기</button>
+<div id="print" style="border: 1px, solid red;">Here?</div>
+
+<form method="post"> {% csrf_token %}
+    요청 값 : <input type="text" style="border: none; background: transparent;" name="predict_order">
+    <input type="submit" value="create">
+</form>
+결과 값 : {{ predict_result }}

@@ -1,0 +1,103 @@
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard | Telcodefence</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/styles.css">
+    <style>
+    /* Figma Background for illustrative/preview purposes only.
+        You can remove this style tag with no consequence */
+    body {background: #E5E5E5; }
+    </style>
+</head>
+
+<body>
+    <div class=e29_946 description="전체">
+        <div  class="e64_472" description="전체"></div>
+        <div  class="e64_484" description="드롭다운 들어갈 자리">
+            <form method="GET" class="form_block">
+                <span class="now_infor"><img style="display:inline; width:400px; height:80px;" src="{{ now_view }}"></span>
+                <select class="dashboard_dropdown" name="dropdown_select">
+                    <option value="user">사용자 정보</option>
+                    <option value="service">서비스 정보</option>
+                    <option value="contract">요금제 정보</option>
+                </select>
+                <input class="dashboard_post_submit" type="submit" value="">
+            </form>
+        </div>
+
+        <div class=e64_509> <!-- 전체 현황 시각화 부분 -->
+            <span  class="e64_492">{{ title1 }}</span>
+            <span  class="e64_493">{{ desc1 }}</span>
+        </div>
+        <div  class="e31_1732" description="전체1 시각화 그림">
+            <img style="display:inline; width:100%; height:100%;" src="/static/images/dashboard_output/output_0.png">
+        </div>
+
+        <div class=e64_510>
+            <span  class="e64_494">{{ title2 }}</span>
+            <span  class="e64_495">{{ desc2 }}</span>
+        </div>
+        <div  class="e64_477" description="전체2 시각화 그림">
+            <img style="display:inline; width:100%; height:100%;" src="/static/images/dashboard_output/output_1.png">
+        </div>
+
+        <div class=e64_511>
+            <span  class="e64_496">{{ title3 }}</span>
+            <span  class="e64_497">{{ desc3 }}</span>
+        </div>
+        <div  class="e64_478" description="전체3 시각화 그림">
+            <img style="display:inline; width:100%; height:100%;" src="/static/images/dashboard_output/output_2.png">
+        </div>
+
+        <div class=e64_512>
+            <span  class="e64_498">{{ title4 }}</span>
+            <span  class="e64_499">{{ desc4 }}</span>
+        </div>
+        <div  class="e64_479" description="전체4 시각화 그림">
+            <img style="display:inline; width:100%; height:100%;" src="/static/images/dashboard_output/output_3.png">
+        </div> <!-- 여기까지 전체 현황 시각화 부분입니다 -->
+
+        <div class=e64_513 description="상관관계 시각화 제목&설명"> <!-- 상관관계 시각화 부분 -->
+            <span  class="e64_500">{{ title5 }}</span>
+            <span  class="e64_501">{{ desc5 }}</span>
+        </div>
+        <div  class="e64_480" description="상관관계0 시각화 그림">
+            <img style="display:inline; width:100%; height:100%;" src="/static/images/dashboard_output/output_4.png">
+        </div>
+
+        <div class=e64_514 >
+            <span  class="e64_502">{{ title6 }}</span>
+            <span  class="e64_503">{{ desc6 }}</span>
+        </div>
+        <div  class="e64_481" description="상관관계2 시각화 그림">
+            <img style="display:inline; width:100%; height:100%;" src="/static/images/dashboard_output/output_5.png">
+        </div>
+
+        <div class=e64_515 >
+            <span  class="e64_504">{{ title7 }}</span>
+            <span  class="e64_505">{{ desc7 }}</span>
+        </div>
+        <div  class="e64_482" description="상관관계3 시각화 그림">
+            <img style="display:inline; width:100%; height:100%;" src="/static/images/dashboard_output/output_6.png">
+        </div>
+
+        <div class=e64_516>
+            <span  class="e64_506">{{ title8 }}</span>
+            <span  class="e64_507">{{ desc8 }}</span> 
+        </div> 
+        <div  class="e64_483" description="상관관계4 시각화 그림">
+            <img style="display:inline; width:100%; height:100%;" src="/static/images/dashboard_output/output_7.png">
+        </div> <!-- 여기까지 상관관계 분석 시각화 부분입니다 -->
+
+        <div class=e64_473 description="세부페이지 바로가기 묶음">
+            <a href="{% url 'customer-detail' %}"  class="e64_474" description="세부 고객 정보 바로가기"></a>
+            <a href="{% url 'customer-list' %}"  class="e64_475" description="고객 이탈 예측 관리 바로가기"></a>
+            <a href="{% url 'dashboard' %}"  class="e64_476" description="종합 정보 시각화 바로가기"></a>
+        </div>
+    </div>
+
+    <a href="{% url 'main-page' %}" class="e20_1588" description="홈페이지 바로가기"></a>
+</body>
+</html>

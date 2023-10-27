@@ -1,0 +1,37 @@
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>Home | Telcodefence</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/styles.css">
+
+    <style>
+    /* Figma Background for illustrative/preview purposes only.
+        You can remove this style tag with no consequence */
+    body {background: #E5E5E5; }
+    </style>
+</head>
+
+<body>
+    <div class=e29_980 description="전체">
+        <div  class="e30_1180" description="전체2"></div>
+        <div class=e31_1181 description="버튼 모음"> 
+            <div class=e31_1182 description="1번째 click">
+                <a href="{% url 'customer-detail' %}" class="ei31_1182_130_99" description="1번째 click"></a>
+                <a href="{% url 'customer-detail' %}" style="text-decoration: none;" class="ei31_1182_130_100" description="1번째 click 텍스트">Click !</a>
+            </div>
+
+            <div class=e31_1183 description="2번째 click">
+                <a href="{% url 'customer-list' %}" class="ei31_1183_130_99" description="2번째 click"></a>
+                <a href="{% url 'customer-list' %}" style="text-decoration: none;" class="ei31_1183_130_100" description="2번째 click 텍스트">Click !</a>
+            </div>
+
+            <div class=e31_1184 description="3번째 click">
+                <a href="{% url 'dashboard' %}" class="ei31_1184_130_99" description="3번째 click"></a>
+                <a href="{% url 'dashboard' %}" style="text-decoration: none;" class="ei31_1184_130_100" description="3번째 click 텍스트">Click !</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
